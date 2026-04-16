@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiring Request — Noibu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --noi-dark:#0a0e1a;--noi-navy:#111827;--noi-navy2:#1a2540;
+  --noi-teal:#00c2a8;--noi-teal-dim:#009e88;
+  --noi-teal-bg:rgba(0,194,168,0.08);--noi-teal-border:rgba(0,194,168,0.25);
+  --red:#ef4444;--red-bg:#fef2f2;--red-border:#fca5a5;
+  --amber:#f59e0b;--amber-bg:#fffbeb;
+  --green:#10b981;--green-bg:#ecfdf5;--green-border:#6ee7b7;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;
+  --gray-700:#374151;--gray-800:#1f2937;--white:#ffffff;
+  --font:'Inter',system-ui,sans-serif;--radius:8px;--radius-lg:12px;
+}
+html{font-family:var(--font);background:#f0f2f5;color:var(--gray-800);min-height:100vh}
+header{background:var(--noi-dark);height:56px;display:flex;align-items:center;padding:0 2rem;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:100}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-img{height:22px;width:auto}
+.logo-divider{width:1px;height:18px;background:rgba(255,255,255,0.15)}
+.logo-label{font-size:12px;font-weight:500;color:rgba(255,255,255,0.45);letter-spacing:0.04em}
+.header-badge{font-size:11px;font-weight:600;color:var(--noi-teal);background:var(--noi-teal-bg);border:1px solid var(--noi-teal-border);padding:3px 10px;border-radius:20px;letter-spacing:0.05em;text-transform:uppercase}
+main{max-width:660px;margin:0 auto;padding:2.5rem 1.25rem 5rem;width:100%}
+.page-eyebrow{font-size:11px;font-weight:600;color:var(--noi-teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.page-title{font-size:26px;font-weight:600;color:var(--gray-800);margin-bottom:6px;line-height:1.25}
+.page-sub{font-size:13px;color:var(--gray-500);margin-bottom:2rem;line-height:1.65}
+.progress{display:flex;align-items:center;margin-bottom:2rem}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--gray-400);flex-shrink:0}
+.prog-step.active{color:var(--noi-teal)}.prog-step.done{color:var(--green)}
+.prog-dot{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;transition:all .2s}
+.prog-step.active .prog-dot{background:var(--noi-teal);border-color:var(--noi-teal);color:var(--noi-dark)}
+.prog-step.done .prog-dot{background:var(--green);border-color:var(--green);color:white;font-size:9px}
+.prog-line{flex:1;height:1px;background:var(--gray-200);margin:0 8px}
+.prog-line.done{background:var(--green)}
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden}
+.section{padding:1.75rem;display:none}.section.active{display:block}
+.section-title{font-size:11px;font-weight:600;color:var(--noi-teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.25rem;padding-bottom:10px;border-bottom:1px solid var(--gray-100)}
+.field{margin-bottom:1rem}.field:last-child{margin-bottom:0}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.field-row{grid-template-columns:1fr}}
+label{display:block;font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:5px;letter-spacing:0.01em}
+.req::after{content:" *";color:var(--red)}
+input[type=text],select,textarea{width:100%;padding:9px 12px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-family:var(--font);font-size:13px;color:var(--gray-800);background:var(--white);transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--noi-teal);box-shadow:0 0 0 3px var(--noi-teal-bg)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239ca3af' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:32px}
+textarea{resize:vertical;min-height:80px;line-height:1.55}
+.hint{font-size:11px;color:var(--gray-400);margin-top:3px}
+.approval-inline{background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1rem}
+.approval-inline.flagged{background:var(--red-bg);border-color:var(--red-border)}
+.approval-inline.approved{background:var(--green-bg);border-color:var(--green-border)}
+.approval-q{font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:10px}
+.approval-opts{display:flex;gap:8px}
+.aopt{flex:1;padding:8px 12px;border-radius:var(--radius);border:1.5px solid var(--gray-200);font-family:var(--font);font-size:13px;font-weight:500;cursor:pointer;background:var(--white);color:var(--gray-600);transition:all .15s;text-align:center}
+.aopt:hover{border-color:var(--gray-400)}
+.aopt.sel-yes{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.aopt.sel-no{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+.approval-flag{display:none;margin-top:10px;font-size:12px;font-weight:500;color:var(--red);background:var(--red-bg);border:1px solid var(--red-border);border-radius:6px;padding:8px 10px;line-height:1.5}
+.approval-flag.visible{display:block}
+.approval-ok{display:none;margin-top:10px;font-size:12px;font-weight:500;color:var(--green)}
+.approval-ok.visible{display:flex;align-items:center;gap:5px}
+.band-box{display:none;background:var(--noi-teal-bg);border:1.5px solid var(--noi-teal-border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1rem}
+.band-box.show{display:block;animation:fadeUp .2s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.band-hdr{font-size:10px;font-weight:700;color:var(--noi-teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.band-range{display:flex;align-items:baseline;gap:6px;margin-bottom:3px}
+.band-fig{font-size:20px;font-weight:600;color:var(--noi-dark)}
+.band-sep{font-size:13px;color:var(--gray-400)}
+.band-sub{font-size:11px;color:var(--gray-500);margin-bottom:0}
+.band-divider{height:1px;background:var(--noi-teal-border);margin:10px 0}
+.sal-warn{display:none;font-size:12px;font-weight:500;color:var(--red);margin-top:4px}
+.sal-warn.show{display:block}
+.sal-low{display:none;font-size:12px;font-weight:500;color:var(--amber);margin-top:4px}
+.sal-low.show{display:block}
+.no-band{font-size:12px;color:var(--gray-400);padding:4px 0}
+.unapproved-banner{display:none;background:var(--red-bg);border:1.5px solid var(--red-border);border-radius:var(--radius);padding:10px 14px;margin-bottom:1rem;font-size:12px;font-weight:600;color:var(--red)}
+.unapproved-banner.show{display:flex;align-items:flex-start;gap:8px}
+.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.review-item{padding:9px 0;border-bottom:1px solid var(--gray-100)}
+.review-item:nth-last-child(-n+2){border-bottom:none}
+.review-label{font-size:11px;color:var(--gray-400);font-weight:500;margin-bottom:1px}
+.review-val{font-size:13px;font-weight:500;color:var(--gray-800)}
+.review-val.flagged{color:var(--red);font-weight:600}
+.card-nav{padding:1rem 1.75rem;border-top:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;background:var(--gray-50)}
+.btn-back{padding:8px 16px;font-family:var(--font);font-size:13px;font-weight:500;color:var(--gray-500);background:var(--white);border:1.5px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;transition:all .15s}
+.btn-back:hover{border-color:var(--gray-400);color:var(--gray-700)}
+.btn-next{padding:9px 20px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--noi-dark);background:var(--noi-teal);border:none;border-radius:var(--radius);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.btn-next:hover{background:var(--noi-teal-dim);transform:translateY(-1px)}
+.btn-submit{padding:9px 22px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--white);background:var(--noi-navy2);border:none;border-radius:var(--radius);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.btn-submit:hover{background:#0f1d35;transform:translateY(-1px)}
+.success-wrap{text-align:center;padding:2.5rem 2rem}
+.success-icon{width:56px;height:56px;border-radius:50%;background:var(--green-bg);border:2px solid var(--green-border);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+.success-icon svg{width:24px;height:24px;color:var(--green)}
+.success-title{font-size:22px;font-weight:600;color:var(--gray-800);margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--gray-500);line-height:1.65;max-width:360px;margin:0 auto 1.25rem}
+.req-chip{display:inline-block;background:var(--noi-dark);color:var(--noi-teal);font-family:'Courier New',monospace;font-size:18px;font-weight:700;padding:8px 20px;border-radius:var(--radius);letter-spacing:0.05em;margin-bottom:1.5rem;border:1px solid rgba(0,194,168,0.3)}
+.success-details{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius);padding:1rem;text-align:left;margin-bottom:1.25rem}
+.sd-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--gray-100);gap:12px}
+.sd-row:last-child{border:none;padding-bottom:0}
+.sd-lbl{font-size:12px;color:var(--gray-400);font-weight:500}
+.sd-val{font-size:12px;font-weight:600;color:var(--gray-700);text-align:right}
+.sd-val.warn{color:var(--red)}
+.btn-another{padding:8px 18px;font-family:var(--font);font-size:13px;font-weight:500;color:var(--noi-teal);background:var(--noi-teal-bg);border:1.5px solid var(--noi-teal-border);border-radius:var(--radius);cursor:pointer;transition:all .15s}
+.btn-another:hover{background:rgba(0,194,168,0.14)}
+.subs-panel{margin-top:2rem}
+.subs-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.subs-title{font-size:12px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em}
+.btn-csv{padding:6px 12px;font-family:var(--font);font-size:11px;font-weight:600;color:var(--noi-teal);background:var(--noi-teal-bg);border:1px solid var(--noi-teal-border);border-radius:6px;cursor:pointer}
+.btn-csv:hover{background:rgba(0,194,168,0.14)}
+.sub-item{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:.875rem 1.125rem;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.sub-item.flagged-item{border-color:var(--red-border);background:var(--red-bg)}
+.sub-reqid{font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:var(--noi-teal);background:var(--noi-dark);padding:3px 8px;border-radius:5px;flex-shrink:0}
+.sub-info{flex:1}
+.sub-name{font-size:13px;font-weight:600;color:var(--gray-800)}
+.sub-meta{font-size:11px;color:var(--gray-400);margin-top:1px}
+.sub-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:0.04em;flex-shrink:0}
+.badge-approved{background:var(--green-bg);color:var(--green)}
+.badge-pending{background:var(--red-bg);color:var(--red)}
+.empty{text-align:center;padding:1.75rem;font-size:12px;color:var(--gray-400);background:var(--white);border:1px dashed var(--gray-200);border-radius:var(--radius)}
+.band-na{font-size:11px;color:var(--gray-400);font-style:italic;margin-top:6px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img class="logo-img" src="https://cdn.prod.website-files.com/66fde14b77beb1e61ff1b26a/67036b5d429d2d776561d94a_Noibu%20logo.svg" alt="Noibu" onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block'">
+    <span id="logo-fb" style="display:none;font-size:17px;font-weight:700;color:white;letter-spacing:-0.3px">Noibu</span>
+    <div class="logo-divider"></div>
+    <span class="logo-label">People Ops</span>
+  </div>
+  <span class="header-badge">New Hiring Request</span>
+</header>
+
+<main>
+  <div class="page-eyebrow">Talent acquisition</div>
+  <h1 class="page-title">Submit a hiring request</h1>
+  <p class="page-sub">Fill out all sections to submit a req. If budget hasn't been confirmed yet you can still submit — it'll be flagged for review before recruiting begins.</p>
+
+  <div class="progress">
+    <div class="prog-step active" id="ps1"><div class="prog-dot" id="pd1">1</div><span>Role</span></div>
+    <div class="prog-line" id="pl1"></div>
+    <div class="prog-step" id="ps2"><div class="prog-dot" id="pd2">2</div><span>Compensation</span></div>
+    <div class="prog-line" id="pl2"></div>
+    <div class="prog-step" id="ps3"><div class="prog-dot" id="pd3">3</div><span>Timeline</span></div>
+    <div class="prog-line" id="pl3"></div>
+    <div class="prog-step" id="ps4"><div class="prog-dot" id="pd4">4</div><span>Review</span></div>
+  </div>
+
+  <div class="form-card">
+
+    <!-- STEP 1: ROLE -->
+    <div class="section active" id="s1">
+      <div class="section-title">Role details</div>
+
+      <div class="approval-inline" id="approval-box">
+        <div class="approval-q">Has your department head confirmed budget approval for this hire?</div>
+        <div class="approval-opts">
+          <button class="aopt" id="aopt-yes" onclick="setApproval(true)">Yes — confirmed</button>
+          <button class="aopt" id="aopt-no" onclick="setApproval(false)">Not yet</button>
+        </div>
+        <div class="approval-flag" id="approval-flag">This req will be flagged as <strong>Pending Approval</strong> and won't move to active recruiting until a dept head signs off. You can still submit.</div>
+        <div class="approval-ok" id="approval-ok">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+          Budget approval confirmed
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="req">Your name</label>
+          <input type="text" id="f-manager" placeholder="e.g. Alex Johnson">
+        </div>
+        <div class="field">
+          <label class="req">Department head (budget owner)</label>
+          <select id="f-depthead">
+            <option value="">Select approver</option>
+            <option>Fil</option>
+            <option>Rob</option>
+            <option>Elad</option>
+            <option>Eyal</option>
+            <option>Kailin</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="req">Department</label>
+          <select id="f-dept" onchange="updateRoles()">
+            <option value="">Select department</option>
+            <option>Business Development</option>
+            <option>Customer Success</option>
+            <option>Engineering</option>
+            <option>Finance</option>
+            <option>Marketing</option>
+            <option>Partnerships</option>
+            <option>People</option>
+            <option>Product &amp; Design</option>
+            <option>Sales</option>
+            <option>Solutions Engineering &amp; Support</option>
+            <option>Support</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="req">Role</label>
+          <select id="f-role" onchange="updateBand()">
+            <option value="">Select department first</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="req">Req type</label>
+          <select id="f-reqtype" onchange="toggleBackfill()">
+            <option value="">Select type</option>
+            <option value="Net New">Net New</option>
+            <option value="Backfill">Backfill</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="req">Location</label>
+          <select id="f-location" onchange="updateBand()">
+            <option value="">Select location</option>
+            <option>Ottawa</option>
+            <option>Toronto</option>
+            <option>Open to Remote</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field" id="backfill-field" style="display:none">
+        <label>Who are you replacing?</label>
+        <input type="text" id="f-backfill" placeholder="Name + departure date">
+        <p class="hint">Required for backfill reqs.</p>
+      </div>
+
+      <div class="field">
+        <label>Business justification</label>
+        <textarea id="f-justification" placeholder="Why is this role needed now? What does the team lose without it?"></textarea>
+      </div>
+    </div>
+    <div class="card-nav" id="nav1">
+      <div></div>
+      <button class="btn-next" onclick="go(2)">Next — Compensation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- STEP 2: COMPENSATION -->
+    <div class="section" id="s2">
+      <div class="section-title">Compensation</div>
+      <div class="band-box" id="band-box">
+        <div class="band-hdr">Pay band — <span id="band-role-label"></span></div>
+        <div class="band-range">
+          <span class="band-fig" id="b-lo">—</span>
+          <span class="band-sep">to</span>
+          <span class="band-fig" id="b-hi">—</span>
+        </div>
+        <div class="band-sub" id="b-level"></div>
+        <div class="band-na" id="b-na" style="display:none">Note: band marked Unavailable in comp sheet — confirm with dept head before submitting.</div>
+        <div class="band-divider"></div>
+        <div class="field" style="margin:0">
+          <label class="req">Budgeted salary</label>
+          <input type="text" id="f-salary" placeholder="e.g. C$115,000" oninput="checkSal()">
+          <div class="sal-warn" id="sal-warn">Above band maximum — Finance escalation required in addition to dept head approval.</div>
+          <div class="sal-low" id="sal-low">Below band midpoint — confirm this is a deliberate budget decision.</div>
+        </div>
+      </div>
+      <div class="no-band" id="no-band">Select a department and role on the previous step to see the pay band.</div>
+    </div>
+    <div class="card-nav" id="nav2" style="display:none">
+      <button class="btn-back" onclick="go(1)">Back</button>
+      <button class="btn-next" onclick="go(3)">Next — Timeline <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- STEP 3: TIMELINE -->
+    <div class="section" id="s3">
+      <div class="section-title">Timeline & priority</div>
+      <div class="field-row">
+        <div class="field">
+          <label class="req">Target start date</label>
+          <input type="text" id="f-start" placeholder="e.g. Aug 1, 2025">
+          <p class="hint">When do you need this person in seat?</p>
+        </div>
+        <div class="field">
+          <label>Hiring priority</label>
+          <select id="f-priority">
+            <option value="Normal">Normal</option>
+            <option value="High">High — blocking work</option>
+            <option value="Critical">Critical — immediate need</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Notes for the recruiter</label>
+        <textarea id="f-notes" placeholder="Must-have skills, interview panel preferences, team context, etc."></textarea>
+      </div>
+    </div>
+    <div class="card-nav" id="nav3" style="display:none">
+      <button class="btn-back" onclick="go(2)">Back</button>
+      <button class="btn-next" onclick="go(4)">Review request <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- STEP 4: REVIEW -->
+    <div class="section" id="s4">
+      <div class="section-title">Review & submit</div>
+      <div class="unapproved-banner" id="unapproved-banner">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        <span>No budget approval confirmed — this req will be flagged as <strong>Pending Approval</strong>. Recruiting won't begin until a dept head signs off.</span>
+      </div>
+      <div class="review-grid" id="review-grid"></div>
+    </div>
+    <div class="card-nav" id="nav4" style="display:none">
+      <button class="btn-back" onclick="go(3)">Back</button>
+      <button class="btn-submit" onclick="submitReq()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+        Submit hiring request
+      </button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="section" id="s-success">
+      <div class="success-wrap">
+        <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg></div>
+        <h2 class="success-title">Request submitted</h2>
+        <p class="success-sub">Use this Req ID in all conversations with the recruiting team and in Slack.</p>
+        <div class="req-chip" id="sc-reqid">Noi-801</div>
+        <div class="success-details" id="sc-details"></div>
+        <button class="btn-another" onclick="resetForm()">Submit another request</button>
+      </div>
+    </div>
+
+  </div><!-- /form-card -->
+
+  <div class="subs-panel">
+    <div class="subs-hdr">
+      <span class="subs-title">Submitted this session</span>
+      <button class="btn-csv" onclick="exportCSV()">Export CSV</button>
+    </div>
+    <div id="sub-list"><div class="empty">No submissions yet.</div></div>
+  </div>
+</main>
+
+<script>
+// ── Real Noibu pay bands from comp sheet ──────────────────────────────────
+// Structure: { dept: [ { title, level, min, mid, max, unavailable? } ] }
+// All figures in CAD. Toronto adds ~8%, Remote matches Ottawa.
+const GEO = { "Ottawa": 1.0, "Toronto": 1.08, "Open to Remote": 1.0 };
+
+const ROLES = {
+  "Business Development": [
+    { title:"Mid Market BDR (BDR I)", level:"P1", min:null, mid:null, max:null, na:true },
+    { title:"Enterprise BDR (BDR 2)", level:"P2", min:null, mid:null, max:null, na:true },
+    { title:"Enterprise BDR (BDR 3)", level:"P3", min:null, mid:null, max:null, na:true },
+    { title:"Manager, Business Development", level:"M3", min:83709, mid:104636, max:125563, na:false },
+  ],
+  "Sales": [
+    { title:"Account Executive - Mid Market", level:"P2", min:77483, mid:96854, max:116225, na:true },
+    { title:"Account Executive - Enterprise", level:"P3", min:102176, mid:127720, max:153264, na:true },
+    { title:"Strategic Enterprise Account Executive", level:"P4", min:131978, mid:164972, max:197966, na:true },
+    { title:"Manager, Sales", level:"M3", min:122039, mid:152548, max:183058, na:true },
+    { title:"Senior Manager, Sales", level:"M4", min:157522, mid:196902, max:236282, na:false },
+    { title:"Director of Sales", level:"M5", min:177714, mid:222142, max:266570, na:false },
+  ],
+  "Support": [
+    { title:"Support Engineer", level:"P1", min:60946, mid:76182, max:91418, na:false },
+    { title:"Product Implementation Specialist", level:"P2", min:76000, mid:95000, max:114000, na:false },
+  ],
+  "Solutions Engineering & Support": [
+    { title:"Sales Engineer (Pre Sales)", level:"P2", min:91190, mid:113987, max:136784, na:false },
+    { title:"Solutions Engineer (Post Sales)", level:"P3", min:88234, mid:110292, max:132351, na:false },
+    { title:"Strategic Solutions Engineer (Pre Sales)", level:"P3", min:106387, mid:132984, max:159581, na:false },
+    { title:"Senior Solutions Engineer (Post Sales)", level:"P3", min:88234, mid:110292, max:132351, na:false },
+    { title:"Team Lead, Solutions Engineering", level:"P4", min:123600, mid:154500, max:185400, na:false },
+    { title:"Manager, Solutions Engineering", level:"M3", min:136974, mid:171218, max:205462, na:false },
+    { title:"Director, Solutions Engineering & Support", level:"M5", min:175160, mid:218950, max:262740, na:false },
+  ],
+  "Customer Success": [
+    { title:"Smart Touch CSM", level:"P1", min:55358, mid:69198, max:83038, na:false },
+    { title:"Mid Market CSM", level:"P2", min:68784, mid:85980, max:103176, na:false },
+    { title:"Enterprise CSM", level:"P3", min:103797, mid:129746, max:155695, na:false },
+    { title:"Key Enterprise CSM", level:"P4", min:130706, mid:163383, max:196060, na:false },
+    { title:"Manager, Customer Success", level:"M3", min:99657, mid:124571, max:149485, na:false },
+  ],
+  "Marketing": [
+    { title:"Content Marketing Manager", level:"P2", min:69018, mid:86272, max:103526, na:false },
+    { title:"Demand Generation Manager", level:"P2", min:67361, mid:84201, max:101041, na:false },
+    { title:"Product Marketing Manager", level:"P2", min:91336, mid:114170, max:137004, na:false },
+    { title:"Sr. Product Marketing Manager", level:"P3", min:112469, mid:140586, max:168703, na:false },
+    { title:"Director, Marketing", level:"M5", min:163766, mid:204708, max:245650, na:true },
+  ],
+  "Finance": [
+    { title:"Financial Analyst", level:"P2", min:79022, mid:98777, max:118532, na:false },
+    { title:"Senior Financial Analyst", level:"P3", min:104319, mid:130399, max:156479, na:false },
+    { title:"Head of Legal and Compliance", level:"P4", min:110208, mid:137759, max:165311, na:false },
+    { title:"Revenue Operations Manager", level:"P3", min:127508, mid:159385, max:191262, na:true },
+    { title:"Controller", level:"P5", min:121311, mid:151639, max:181967, na:false },
+    { title:"Director of Accounting", level:"M5", min:161705, mid:202131, max:242557, na:false },
+  ],
+  "Partnerships": [
+    { title:"Associate PAM", level:"P1", min:70791, mid:88489, max:106187, na:false },
+    { title:"PAM", level:"P2", min:112086, mid:140107, max:168128, na:false },
+    { title:"Senior PAM", level:"P3", min:152594, mid:190742, max:228890, na:false },
+  ],
+  "People": [
+    { title:"People Ops Specialist", level:"P2", min:66259, mid:82824, max:99389, na:false },
+    { title:"Senior Talent Acquisition Partner", level:"P4", min:128238, mid:160297, max:192356, na:false },
+    { title:"Talent Acquisition Lead", level:"P4", min:128238, mid:160297, max:192356, na:false },
+  ],
+  "Product & Design": [
+    { title:"Senior Product Designer", level:"P4", min:131970, mid:164962, max:197954, na:false },
+    { title:"Staff Product Designer", level:"P5", min:164508, mid:205635, max:246762, na:false },
+    { title:"Principal Product Designer", level:"P6", min:205069, mid:256336, max:307604, na:false },
+    { title:"Senior Product Manager", level:"P3", min:130370, mid:162963, max:195556, na:false },
+    { title:"Lead, Product Management", level:"P4", min:145566, mid:181958, max:218350, na:false },
+    { title:"Staff Product Manager", level:"P5", min:170846, mid:213557, max:256268, na:false },
+    { title:"Director of Product", level:"M5", min:170846, mid:213557, max:256268, na:false },
+  ],
+  "Engineering": [
+    { title:"Software Developer I", level:"P1", min:82305, mid:102881, max:123457, na:false },
+    { title:"Software Developer II", level:"P2", min:93578, mid:116973, max:140368, na:false },
+    { title:"Senior Software Developer", level:"P3", min:129081, mid:161351, max:193621, na:false },
+    { title:"DevOps Engineer", level:"P4", min:148944, mid:186180, max:223416, na:false },
+    { title:"Senior Data Scientist", level:"P4", min:145027, mid:181284, max:217541, na:false },
+    { title:"Team Lead, Engineering", level:"P4", min:147966, mid:184958, max:221950, na:false },
+    { title:"Staff Developer", level:"P5", min:166853, mid:208566, max:250279, na:false },
+    { title:"Principal Systems Engineer", level:"P6", min:178064, mid:222580, max:267096, na:false },
+    { title:"Manager, Engineering (EM1)", level:"M3", min:154045, mid:192556, max:231067, na:false },
+    { title:"Senior Manager, Engineering (EM2)", level:"M4", min:164874, mid:206092, max:247310, na:false },
+    { title:"Director, Engineering", level:"M5", min:195955, mid:244944, max:293933, na:false },
+  ],
+};
+
+let approvalYes=null, submissions=[], step=1, currentBand=null;
+
+function fmt(n){ return "C$"+Math.round(n).toLocaleString(); }
+function parseSal(s){ return parseFloat(s.replace(/[^0-9.]/g,""))||0; }
+
+function setApproval(yes){
+  approvalYes=yes;
+  document.getElementById("aopt-yes").className="aopt"+(yes?" sel-yes":"");
+  document.getElementById("aopt-no").className="aopt"+(!yes?" sel-no":"");
+  document.getElementById("approval-flag").className="approval-flag"+(!yes?" visible":"");
+  document.getElementById("approval-ok").className="approval-ok"+(yes?" visible":"");
+  const box=document.getElementById("approval-box");
+  box.className="approval-inline"+(yes?" approved":yes===false?" flagged":"");
+}
+
+function toggleBackfill(){
+  document.getElementById("backfill-field").style.display=
+    document.getElementById("f-reqtype").value==="Backfill"?"block":"none";
+}
+
+function updateRoles(){
+  const dept=document.getElementById("f-dept").value;
+  const sel=document.getElementById("f-role");
+  sel.innerHTML='<option value="">Select role</option>';
+  currentBand=null;
+  hideBand();
+  if(!dept||!ROLES[dept]) return;
+  ROLES[dept].forEach(r=>{
+    const opt=document.createElement("option");
+    opt.value=r.title; opt.textContent=r.title+" ("+r.level+")";
+    sel.appendChild(opt);
+  });
+}
+
+function hideBand(){
+  document.getElementById("band-box").className="band-box";
+  document.getElementById("no-band").style.display="block";
+}
+
+function updateBand(){
+  const dept=document.getElementById("f-dept").value;
+  const roleTitle=document.getElementById("f-role").value;
+  const loc=document.getElementById("f-location").value;
+  if(!dept||!roleTitle||!loc||!ROLES[dept]){hideBand();return;}
+  const role=ROLES[dept].find(r=>r.title===roleTitle);
+  if(!role){hideBand();return;}
+  const geo=GEO[loc]||1.0;
+  if(role.na||role.min===null){
+    // Show unavailable state
+    document.getElementById("b-lo").textContent="—";
+    document.getElementById("b-hi").textContent="—";
+    document.getElementById("b-level").textContent=role.level+" · Unavailable in comp sheet";
+    document.getElementById("b-na").style.display="block";
+    document.getElementById("band-role-label").textContent=roleTitle;
+    document.getElementById("band-box").className="band-box show";
+    document.getElementById("no-band").style.display="none";
+    currentBand=null;
+    return;
+  }
+  const lo=Math.round(role.min*geo);
+  const mid=Math.round(role.mid*geo);
+  const hi=Math.round(role.max*geo);
+  currentBand={lo,mid,hi};
+  document.getElementById("b-lo").textContent=fmt(lo);
+  document.getElementById("b-hi").textContent=fmt(hi);
+  document.getElementById("b-level").textContent=role.level+(geo!==1?" · "+loc+" rate applied":"");
+  document.getElementById("b-na").style.display="none";
+  document.getElementById("band-role-label").textContent=roleTitle;
+  document.getElementById("band-box").className="band-box show";
+  document.getElementById("no-band").style.display="none";
+  checkSal();
+}
+
+function checkSal(){
+  if(!currentBand){return;}
+  const v=parseSal(document.getElementById("f-salary").value);
+  document.getElementById("sal-warn").className="sal-warn"+(v>currentBand.hi&&v>0?" show":"");
+  document.getElementById("sal-low").className="sal-low"+(v>0&&v<currentBand.mid&&v>=currentBand.lo?" show":"");
+}
+
+function go(n){
+  document.getElementById("s"+step).classList.remove("active");
+  document.getElementById("nav"+step).style.display="none";
+  if(n<=4){
+    document.getElementById("s"+n).classList.add("active");
+    document.getElementById("nav"+n).style.display="";
+  }
+  for(let i=1;i<=4;i++){
+    const ps=document.getElementById("ps"+i);
+    const pd=document.getElementById("pd"+i);
+    const pl=document.getElementById("pl"+i);
+    if(i<n){ps.className="prog-step done";pd.textContent="✓";}
+    else if(i===n){ps.className="prog-step active";pd.textContent=i;}
+    else{ps.className="prog-step";pd.textContent=i;}
+    if(pl)pl.className="prog-line"+(i<n?" done":"");
+  }
+  if(n===4)buildReview();
+  step=n;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function buildReview(){
+  const noApp=approvalYes===false||approvalYes===null;
+  document.getElementById("unapproved-banner").className="unapproved-banner"+(noApp?" show":"");
+  const dept=document.getElementById("f-dept").value;
+  const role=document.getElementById("f-role").value;
+  const loc=document.getElementById("f-location").value;
+  const roleObj=dept&&role&&ROLES[dept]?ROLES[dept].find(r=>r.title===role):null;
+  const levelStr=roleObj?roleObj.level:"—";
+  const fields=[
+    ["Role",role||"—"],
+    ["Manager",document.getElementById("f-manager").value||"—"],
+    ["Dept head",document.getElementById("f-depthead").value||"—"],
+    ["Department",dept||"—"],
+    ["Level",levelStr],
+    ["Req type",document.getElementById("f-reqtype").value||"—"],
+    ["Location",loc||"—"],
+    ["Budgeted salary",document.getElementById("f-salary").value||"—"],
+    ["Target start",document.getElementById("f-start").value||"—"],
+    ["Priority",document.getElementById("f-priority").value||"Normal"],
+    ["Budget approval",noApp?"Not confirmed ⚠":"Confirmed ✓"],
+  ];
+  document.getElementById("review-grid").innerHTML=fields.map(([l,v])=>`
+    <div class="review-item">
+      <div class="review-label">${l}</div>
+      <div class="review-val${l==="Budget approval"&&noApp?" flagged":""}">${v}</div>
+    </div>`).join("");
+}
+
+function getNextId(){
+  const nums=submissions.map(s=>{const m=s.reqId.match(/Noi-(\d+)/);return m?parseInt(m[1]):800;});
+  return"Noi-"+(Math.max(800,...nums)+1);
+}
+
+function submitReq(){
+  const noApp=approvalYes===false||approvalYes===null;
+  const reqId=getNextId();
+  const dept=document.getElementById("f-dept").value;
+  const role=document.getElementById("f-role").value;
+  const roleObj=dept&&role&&ROLES[dept]?ROLES[dept].find(r=>r.title===role):null;
+  const data={
+    reqId,
+    approvalStatus:noApp?"Pending Approval":"Approved",
+    status:noApp?"Pending":"Open",
+    jobTitle:role,
+    level:roleObj?roleObj.level:"",
+    manager:document.getElementById("f-manager").value,
+    deptHead:document.getElementById("f-depthead").value,
+    dept,
+    reqType:document.getElementById("f-reqtype").value,
+    location:document.getElementById("f-location").value,
+    salary:document.getElementById("f-salary").value,
+    targetStart:document.getElementById("f-start").value,
+    priority:document.getElementById("f-priority").value,
+    justification:document.getElementById("f-justification").value,
+    notes:document.getElementById("f-notes").value,
+    backfill:document.getElementById("f-backfill").value,
+    submittedAt:new Date().toLocaleDateString("en-CA",{month:"short",day:"numeric",year:"numeric"})
+  };
+  submissions.push(data);
+  document.getElementById("sc-reqid").textContent=reqId;
+  document.getElementById("sc-details").innerHTML=`
+    <div class="sd-row"><span class="sd-lbl">Role</span><span class="sd-val">${data.jobTitle}</span></div>
+    <div class="sd-row"><span class="sd-lbl">Department</span><span class="sd-val">${data.dept}</span></div>
+    <div class="sd-row"><span class="sd-lbl">Level · Location</span><span class="sd-val">${data.level} · ${data.location}</span></div>
+    <div class="sd-row"><span class="sd-lbl">Budgeted salary</span><span class="sd-val">${data.salary||"—"}</span></div>
+    <div class="sd-row"><span class="sd-lbl">Target start</span><span class="sd-val">${data.targetStart}</span></div>
+    <div class="sd-row"><span class="sd-lbl">Approval status</span><span class="sd-val${noApp?" warn":""}">${data.approvalStatus}</span></div>`;
+  for(let i=1;i<=4;i++){
+    document.getElementById("s"+i).classList.remove("active");
+    document.getElementById("nav"+i).style.display="none";
+  }
+  document.getElementById("s-success").classList.add("active");
+  for(let i=1;i<=4;i++){
+    document.getElementById("ps"+i).className="prog-step done";
+    document.getElementById("pd"+i).textContent="✓";
+    const pl=document.getElementById("pl"+i);if(pl)pl.className="prog-line done";
+  }
+  renderList();
+}
+
+function renderList(){
+  const el=document.getElementById("sub-list");
+  if(!submissions.length){el.innerHTML='<div class="empty">No submissions yet.</div>';return;}
+  el.innerHTML=submissions.slice().reverse().map(s=>`
+    <div class="sub-item${s.approvalStatus==="Pending Approval"?" flagged-item":""}">
+      <div class="sub-reqid">${s.reqId}</div>
+      <div class="sub-info">
+        <div class="sub-name">${s.jobTitle} · ${s.dept}</div>
+        <div class="sub-meta">${s.level} · ${s.location} · submitted ${s.submittedAt}</div>
+      </div>
+      <div class="sub-badge ${s.approvalStatus==="Approved"?"badge-approved":"badge-pending"}">${s.approvalStatus}</div>
+    </div>`).join("");
+}
+
+function resetForm(){
+  document.getElementById("s-success").classList.remove("active");
+  document.getElementById("s1").classList.add("active");
+  document.getElementById("nav1").style.display="";
+  document.querySelectorAll("input[type=text],textarea").forEach(e=>e.value="");
+  document.querySelectorAll("select").forEach(e=>e.selectedIndex=0);
+  document.getElementById("f-role").innerHTML='<option value="">Select department first</option>';
+  document.getElementById("backfill-field").style.display="none";
+  document.getElementById("approval-box").className="approval-inline";
+  ["aopt-yes","aopt-no"].forEach(id=>document.getElementById(id).className="aopt");
+  document.getElementById("approval-flag").className="approval-flag";
+  document.getElementById("approval-ok").className="approval-ok";
+  hideBand();currentBand=null;
+  for(let i=1;i<=4;i++){
+    document.getElementById("ps"+i).className=i===1?"prog-step active":"prog-step";
+    document.getElementById("pd"+i).textContent=i;
+    const pl=document.getElementById("pl"+i);if(pl)pl.className="prog-line";
+    if(i>1)document.getElementById("nav"+i).style.display="none";
+  }
+  approvalYes=null;step=1;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function exportCSV(){
+  if(!submissions.length){alert("No submissions to export.");return;}
+  const cols=["reqId","status","approvalStatus","jobTitle","level","manager","deptHead","dept","reqType","location","salary","targetStart","priority","submittedAt","justification","notes"];
+  const csv=[cols.join(","),...submissions.map(s=>cols.map(k=>`"${(s[k]||"").replace(/"/g,'""')}"`).join(","))].join("\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download="noibu_hiring_reqs.csv";a.click();
+}
+</script>
+</body>
+</html>
