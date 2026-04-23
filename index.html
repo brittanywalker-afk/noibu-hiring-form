@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- saved from url=(0069)file:///Users/brittanywalker/Downloads/hiring-request-form%20(2).html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="icon" type="image/png" href="/noibu-hiring-form/favicon.png">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hiring Request — Noibu</title>
-<link href="./index_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -123,13 +123,37 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
 .badge-pending{background:var(--red-bg);color:var(--red)}
 .empty{text-align:center;padding:1.75rem;font-size:12px;color:var(--gray-400);background:var(--white);border:1px dashed var(--gray-200);border-radius:var(--radius)}
 .band-na{font-size:11px;color:var(--gray-400);font-style:italic;margin-top:6px}
+#pw-gate{position:fixed;inset:0;background:var(--noi-dark);display:flex;align-items:center;justify-content:center;z-index:9999}
+#pw-gate.hidden{display:none}
+.pw-box{background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2.5rem 2rem;width:100%;max-width:380px;text-align:center}
+.pw-logo{height:24px;margin:0 auto 1.5rem}
+.pw-title{font-size:18px;font-weight:600;color:white;margin-bottom:6px}
+.pw-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:1.5rem;line-height:1.6}
+.pw-input{width:100%;padding:10px 14px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:8px;font-family:var(--font);font-size:14px;color:white;text-align:center;letter-spacing:0.05em;margin-bottom:10px}
+.pw-input:focus{outline:none;border-color:var(--noi-teal)}
+.pw-input::placeholder{color:rgba(255,255,255,0.25);letter-spacing:0}
+.pw-btn{width:100%;padding:10px;background:var(--noi-teal);border:none;border-radius:8px;font-family:var(--font);font-size:14px;font-weight:600;color:var(--noi-dark);cursor:pointer;transition:background .15s}
+.pw-btn:hover{background:var(--noi-teal-dim)}
+.pw-error{font-size:12px;color:#f87171;margin-top:8px;display:none}
+.pw-error.show{display:block}
 </style>
 </head>
 <body>
 
+<div id="pw-gate">
+  <div class="pw-box">
+    <img class="pw-logo" src="https://cdn.prod.website-files.com/66fde14b77beb1e61ff1b26a/67036b5d429d2d776561d94a_Noibu%20logo.svg" alt="Noibu" onerror="this.style.display='none'">
+    <div class="pw-title">Internal use only</div>
+    <div class="pw-sub">This form is for Noibu team members. Enter the password to continue.</div>
+    <input class="pw-input" type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="pw-btn" onclick="checkPw()">Continue</button>
+    <div class="pw-error" id="pw-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
 <header>
   <div class="logo-wrap">
-    <img class="logo-img" src="./index_files/67036b5d429d2d776561d94a_Noibu logo.svg" alt="Noibu" onerror="this.style.display=&#39;none&#39;;document.getElementById(&#39;logo-fb&#39;).style.display=&#39;block&#39;">
+    <img class="logo-img" src="https://cdn.prod.website-files.com/66fde14b77beb1e61ff1b26a/67036b5d429d2d776561d94a_Noibu%20logo.svg" alt="Noibu" onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block'">
     <span id="logo-fb" style="display:none;font-size:17px;font-weight:700;color:white;letter-spacing:-0.3px">Noibu</span>
     <div class="logo-divider"></div>
     <span class="logo-label">People Ops</span>
@@ -166,7 +190,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
         </div>
         <div class="approval-flag" id="approval-flag">This req will be flagged as <strong>Pending Approval</strong> and won't move to active recruiting until a dept head signs off. You can still submit.</div>
         <div class="approval-ok" id="approval-ok">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"></path></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
           Budget approval confirmed
         </div>
       </div>
@@ -180,11 +204,12 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
           <label class="req">Department head (budget owner)</label>
           <select id="f-depthead">
             <option value="">Select approver</option>
-            <option>Fil</option>
-            <option>Rob</option>
-            <option>Elad</option>
-            <option>Eyal</option>
-            <option>Kailin</option>
+            <option>Elad Rosenberg</option>
+            <option>Eyal Maor</option>
+            <option>Fil Slatinac</option>
+            <option>Kailin Noivo</option>
+            <option>McKenzie Hunter</option>
+            <option>Rob Boukine</option>
           </select>
         </div>
       </div>
@@ -248,17 +273,25 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
     </div>
     <div class="card-nav" id="nav1">
       <div></div>
-      <button class="btn-next" onclick="go(2)">Next — Compensation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      <button class="btn-next" onclick="go(2)">Next — Compensation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
 
     <!-- STEP 2: COMPENSATION -->
     <div class="section" id="s2">
       <div class="section-title">Compensation</div>
-      <p style="font-size:13px; font-weight:400; color:#555; margin-bottom:12px;">Noibu targets the 75th percentile of market rates for all roles. The pay band shown reflects a range of 20% below to 20% above that benchmark, giving flexibility based on candidate experience and budget. If you have a specific salary range in mind for this role, please indicate it below — this helps the recruiting team align candidates to your budget from the start.</p>
+
+      <div style="display:flex;gap:10px;padding:10px 12px;background:var(--gray-50);border:0.5px solid var(--gray-200);border-left:3px solid var(--noi-teal);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem">
+        <div>
+          <div style="font-size:11px;font-weight:600;color:var(--noi-teal);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px">Noibu comp philosophy</div>
+          <div style="font-size:12px;color:var(--gray-600);line-height:1.65">We target the <strong style="color:var(--gray-800);font-weight:600">75th percentile</strong> of market for all roles. The band shown reflects ±20% around that target — giving flexibility based on a candidate's experience and the budget available. Enter the salary that best reflects what you have to work with for this hire. If you're unsure, start at the midpoint.</div>
+        </div>
+      </div>
+
+      <div class="band-box" id="band-box">
         <div class="band-hdr">Pay band — <span id="band-role-label"></span></div>
         <div class="band-range">
           <span class="band-fig" id="b-lo">—</span>
-          <span class="band-sep">to</span>
+          <span class="band-sep" id="b-sep">to</span>
           <span class="band-fig" id="b-hi">—</span>
         </div>
         <div class="band-sub" id="b-level"></div>
@@ -275,12 +308,12 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
     </div>
     <div class="card-nav" id="nav2" style="display:none">
       <button class="btn-back" onclick="go(1)">Back</button>
-      <button class="btn-next" onclick="go(3)">Next — Timeline <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      <button class="btn-next" onclick="go(3)">Next — Timeline <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
 
     <!-- STEP 3: TIMELINE -->
     <div class="section" id="s3">
-      <div class="section-title">Timeline &amp; priority</div>
+      <div class="section-title">Timeline & priority</div>
       <div class="field-row">
         <div class="field">
           <label class="req">Target start date</label>
@@ -303,14 +336,14 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
     </div>
     <div class="card-nav" id="nav3" style="display:none">
       <button class="btn-back" onclick="go(2)">Back</button>
-      <button class="btn-next" onclick="go(4)">Review request <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      <button class="btn-next" onclick="go(4)">Review request <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
 
     <!-- STEP 4: REVIEW -->
     <div class="section" id="s4">
-      <div class="section-title">Review &amp; submit</div>
+      <div class="section-title">Review & submit</div>
       <div class="unapproved-banner" id="unapproved-banner">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
         <span>No budget approval confirmed — this req will be flagged as <strong>Pending Approval</strong>. Recruiting won't begin until a dept head signs off.</span>
       </div>
       <div class="review-grid" id="review-grid"></div>
@@ -318,7 +351,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
     <div class="card-nav" id="nav4" style="display:none">
       <button class="btn-back" onclick="go(3)">Back</button>
       <button class="btn-submit" onclick="submitReq()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"></path></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
         Submit hiring request
       </button>
     </div>
@@ -326,7 +359,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.55}
     <!-- SUCCESS -->
     <div class="section" id="s-success">
       <div class="success-wrap">
-        <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"></path></svg></div>
+        <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg></div>
         <h2 class="success-title">Request submitted</h2>
         <p class="success-sub">Use this Req ID in all conversations with the recruiting team and in Slack.</p>
         <div class="req-chip" id="sc-reqid">Noi-801</div>
@@ -354,9 +387,9 @@ const GEO = { "Ottawa": 1.0, "Toronto": 1.08, "Open to Remote": 1.0 };
 
 const ROLES = {
   "Business Development": [
-    { title:"Mid Market BDR (BDR I)", level:"P1", min:null, mid:null, max:null, na:true },
-    { title:"Enterprise BDR (BDR 2)", level:"P2", min:null, mid:null, max:null, na:true },
-    { title:"Enterprise BDR (BDR 3)", level:"P3", min:null, mid:null, max:null, na:true },
+    { title:"Mid Market BDR (BDR I)", level:"P1", min:50000, mid:50000, max:50000, na:false, note:"Base salary. OTE C$70,400 (incl. commission)" },
+    { title:"Enterprise BDR (BDR 2)", level:"P2", min:54250, mid:54250, max:54250, na:false, note:"Base salary. OTE C$77,500 (incl. commission)" },
+    { title:"Enterprise BDR (BDR 3)", level:"P3", min:59500, mid:59500, max:59500, na:false, note:"Base salary. OTE C$85,000 (incl. commission)" },
     { title:"Manager, Business Development", level:"M3", min:83709, mid:104636, max:125563, na:false },
   ],
   "Sales": [
@@ -499,9 +532,11 @@ function updateBand(){
   const mid=Math.round(role.mid*geo);
   const hi=Math.round(role.max*geo);
   currentBand={lo,mid,hi};
-  document.getElementById("b-lo").textContent=fmt(lo);
-  document.getElementById("b-hi").textContent=fmt(hi);
-  document.getElementById("b-level").textContent=role.level+(geo!==1?" · "+loc+" rate applied":"");
+  const isFixed=role.min===role.max;
+  document.getElementById("b-lo").textContent=isFixed?fmt(lo):fmt(lo);
+  document.getElementById("b-hi").textContent=isFixed?fmt(lo):fmt(hi);
+  document.getElementById("b-sep").style.display=isFixed?"none":"inline";
+  document.getElementById("b-level").textContent=role.level+(role.note?" · "+role.note:geo!==1?" · "+loc+" rate applied":"");
   document.getElementById("b-na").style.display="none";
   document.getElementById("band-role-label").textContent=roleTitle;
   document.getElementById("band-box").className="band-box show";
@@ -566,8 +601,10 @@ function buildReview(){
 }
 
 function getNextId(){
-  const nums=submissions.map(s=>{const m=s.reqId.match(/Noi-(\d+)/);return m?parseInt(m[1]):800;});
-  return"Noi-"+(Math.max(800,...nums)+1);
+  const current=parseInt(localStorage.getItem("noi_req_counter")||"99");
+  const next=current+1;
+  localStorage.setItem("noi_req_counter",next);
+  return"Noi-"+next;
 }
 
 function submitReq(){
@@ -669,6 +706,23 @@ function exportCSV(){
   a.download="noibu_hiring_reqs.csv";a.click();
 }
 </script>
-
-
-</body></html>
+<script>
+(function(){
+  if(sessionStorage.getItem("noi_auth")==="1"){
+    document.getElementById("pw-gate").classList.add("hidden");
+  }
+})();
+function checkPw(){
+  const val=document.getElementById("pw-input").value;
+  if(val==="Noibu2017!"){
+    sessionStorage.setItem("noi_auth","1");
+    document.getElementById("pw-gate").classList.add("hidden");
+  } else {
+    document.getElementById("pw-error").className="pw-error show";
+    document.getElementById("pw-input").value="";
+    document.getElementById("pw-input").focus();
+  }
+}
+</script>
+</body>
+</html>
